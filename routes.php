@@ -1,6 +1,7 @@
 <?php
-	$controller = '';
-	$action = '';
+	session_start();
+	$controller = 'login';
+	$action = 'login';
 
 	if(isset($_GET['controller'])) {
 		$controller = $_GET['controller'];
