@@ -1,6 +1,7 @@
 <?php
 	require_once 'Controller.php';
 	require_once 'models/Product.php';
+	require_once 'models/User.php';
 
 	class ProductController extends Controller
 	{
@@ -20,18 +21,22 @@
 		}
 
 		public function find($errors = []) {
-			if(isset($_GET['id']) || isset($_POST['id'])) {
-				if(isset($_GET['id'])) {
-					$id = $_GET['id'];
-				} else if(isset($_POST['id'])) {
-					$id = $_POST['id'];
+			if (User::findByName($_SESSION['username'])->id == Product::find($_GET['id'])->getUserId()) {
+				if(isset($_GET['id']) || isset($_POST['id'])) {
+					if(isset($_GET['id'])) {
+						$id = $_GET['id'];
+					} else if(isset($_POST['id'])) {
+						$id = $_POST['id'];
+					}
+					$product = Product::find($id);
+					$data = [
+						'product' => $product,
+						'errors'  => $errors
+					];
+					$this->render('EditProductPage', $data);
 				}
-				$product = Product::find($id);
-				$data = [
-					'product' => $product,
-					'errors'  => $errors
-				];
-				$this->render('EditProductPage', $data);
+			} else {
+				die("Unauthorize Action.");
 			}
 		}
 
@@ -78,7 +83,7 @@
 				} else {
 					$image_link = BASE_URL . '/assets/images/'. $_FILES['new-image']['name'];
 	        		Product::create(
-	        			$_SESSION['id'],
+	        			User::findByName($_SESSION['username'])->id,
 						$_POST['name'],
 						$_POST['brand'],
 						$_POST['description'],
