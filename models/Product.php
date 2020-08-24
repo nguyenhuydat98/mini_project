@@ -2,6 +2,7 @@
 	class Product
 	{
 		private $id;
+		private $user_id;
 		private $name;
 		private $brand;
 		private $description;
@@ -19,6 +20,10 @@
 
 		public function getId() {
 			return $this->id;
+		}
+
+		public function getUserId() {
+			return $this->user_id;
 		}
 
 		public function getName() {
@@ -91,9 +96,10 @@
 			$result = mysqli_query($conn, $sql);
 		}
 
-		public function create($name, $brand, $description, $image, $price) {
+		public function create($user_id, $name, $brand, $description, $image, $price) {
 			$conn = DB::getConnection();
-			$sql  = "INSERT INTO products(name, brand, description, image, price) VALUES(
+			$sql  = "INSERT INTO products(user_id, name, brand, description, image, price) VALUES(
+				'$user_id',
 				'$name',
 				'$brand',
 				'$description',
