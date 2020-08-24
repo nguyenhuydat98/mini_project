@@ -54,7 +54,7 @@
 						$row['brand'],
 						$row['description'],
 						$row['image'],
-						$row['price'],
+						$row['price']
 					);
 				}
 			}
@@ -73,7 +73,7 @@
 					$row['brand'],
 					$row['description'],
 					$row['image'],
-					$row['price'],
+					$row['price']
 				);
 			}
 			return null;

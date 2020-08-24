@@ -41,7 +41,10 @@
 				$password = $_POST['password'];
 			}
 			// validate data
-			if (!is_string($username) || !ctype_alnum($username) || strlen($username)<4) {
+			if (isset($_POST['token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf'])) {
+				die('invalid token');
+			}
+			if (!is_string($username) || !ctype_alnum($username) || strlen($username)<4 || !ctype_alpha($username[0])) {
 				$errors[] = "Invalid username";
 			}
 			if (!is_string($password) || strlen($password)<8) {

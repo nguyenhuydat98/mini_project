@@ -41,7 +41,7 @@
 					$_POST['brand'],
 					$_POST['description'],
 					$image_link,
-					$_POST['price'],
+					$_POST['price']
 				);
 				header('location: index.php?controller=product&action=list');
 			}
@@ -55,12 +55,13 @@
 			if(isset($_POST['create-product']) && isset($_FILES['new-image'])) {
 				if(!$_FILES['new-image']['error']) {
     				$image_link = BASE_URL . '/assets/images/'. $_FILES['new-image']['name'];
-	        		Product::create(
+	        		
+	        		-Product::create(
 						$_POST['name'],
 						$_POST['brand'],
 						$_POST['description'],
 						$image_link,
-						$_POST['price'],
+						$_POST['price']
 					);
 					header('location: index.php?controller=product&action=list');
 				}

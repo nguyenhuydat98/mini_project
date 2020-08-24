@@ -38,7 +38,10 @@
 				$confirm_password = $_POST['confirm_password'];
 			}
 			// validate data
-			if (!is_string($username) || !ctype_alnum($username) || strlen($username)<4) {
+			if (isset($_POST['token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf'])) {
+				die('invalid token');
+			}
+			if (!is_string($username) || !ctype_alnum($username) || strlen($username)<4 || !ctype_alpha($username[0])) {
 				$errors[] = "Invalid username";
 			}
 			if ($password != NULL) {
@@ -52,6 +55,10 @@
 			$user = User::findByName($_SESSION['username'],true);
 			if ($user->id == NULL) {
 				$errors[] = "Cant find user";
+			}
+			$newUser = User::findByName($username,true);
+			if ($user->id != NULL) {
+				$errors[] = "User already existed";
 			}
 			if (!empty($errors)) {
 				$this->edit($errors);
@@ -69,6 +76,10 @@
 		}
 
 		public function destroy() {
+			// validate token
+			if (isset($_POST['token']) || !hash_equals($_SESSION['csrf_token'], $_POST['csrf'])) {
+				die('invalid token');
+			}
 			// get current auth user
 			$user = User::findByName($_SESSION['username']);
 			// delete user
