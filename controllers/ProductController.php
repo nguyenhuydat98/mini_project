@@ -1,6 +1,7 @@
 <?php
 	require_once 'Controller.php';
 	require_once 'models/Product.php';
+	require_once 'models/User.php';
 
 	class ProductController extends Controller
 	{
@@ -78,7 +79,7 @@
 				} else {
 					$image_link = BASE_URL . '/assets/images/'. $_FILES['new-image']['name'];
 	        		Product::create(
-	        			$_SESSION['id'],
+	        			User::findByName($_SESSION['username'])->id,
 						$_POST['name'],
 						$_POST['brand'],
 						$_POST['description'],
