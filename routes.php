@@ -3,6 +3,10 @@
 	$controller = 'login';
 	$action = 'login';
 
+	if (!isset($_SESSION['csrf_token'])) {
+		$_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+	}
+
 	if(isset($_GET['controller'])) {
 		$controller = $_GET['controller'];
 		if(isset($_GET['action'])) {

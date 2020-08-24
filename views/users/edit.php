@@ -1,5 +1,8 @@
 <div class="card-body m-4 p-4 border rounded">
 	<form method="POST" action="?controller=user&action=update">
+
+		<input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf_token'] ?>">
+
 		<div class="form-group row">
 			<label for="username" class="col-md-4 col-form-label text-md-right">
 				Username
@@ -64,6 +67,7 @@
 						<div class="modal-footer">
 							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
 							<form method="POST" action="?controller=user&action=destroy">
+								<input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf_token'] ?>">
 								<button type="submit" class="btn btn-danger">Delete</button>
 							</form>
 						</div>
