@@ -21,18 +21,22 @@
 		}
 
 		public function find($errors = []) {
-			if(isset($_GET['id']) || isset($_POST['id'])) {
-				if(isset($_GET['id'])) {
-					$id = $_GET['id'];
-				} else if(isset($_POST['id'])) {
-					$id = $_POST['id'];
+			if (User::findByName($_SESSION['username'])->id == Product::find($_GET['id'])->getUserId()) {
+				if(isset($_GET['id']) || isset($_POST['id'])) {
+					if(isset($_GET['id'])) {
+						$id = $_GET['id'];
+					} else if(isset($_POST['id'])) {
+						$id = $_POST['id'];
+					}
+					$product = Product::find($id);
+					$data = [
+						'product' => $product,
+						'errors'  => $errors
+					];
+					$this->render('EditProductPage', $data);
 				}
-				$product = Product::find($id);
-				$data = [
-					'product' => $product,
-					'errors'  => $errors
-				];
-				$this->render('EditProductPage', $data);
+			} else {
+				die("Unauthorize Action.");
 			}
 		}
 
