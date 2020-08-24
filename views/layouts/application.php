@@ -18,7 +18,7 @@
 		<header>
 			<nav class="navbar navbar-expand-lg navbar-light bg-light">
 				<div class="collapse navbar-collapse" id="navbarSupportedContent">
-					<a class="navbar-brand" href="#">MINI PROJECT | </a>
+					<a class="navbar-brand" href="<?php echo BASE_URL ?>/index.php?controller=login&action=login">MINI PROJECT | </a>
 					<ul class="navbar-nav ml-auto">
 						<?php if (!isset($_SESSION['isLogged']) || !$_SESSION['isLogged']) {?>
 							<li class="nav-item">
