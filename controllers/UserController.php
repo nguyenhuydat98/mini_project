@@ -53,6 +53,10 @@
 			if ($user->id == NULL) {
 				$errors[] = "Cant find user";
 			}
+			$newUser = User::findByName($username,true);
+			if ($newUser != NULL) {
+				$errors[] = "Username already taken.";
+			}
 			if (!empty($errors)) {
 				$this->edit($errors);
 			}

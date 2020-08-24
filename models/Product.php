@@ -46,7 +46,7 @@
 			$conn  = DB::getConnection();
 			$sql   = "SELECT * FROM products";
 			$result = mysqli_query($conn, $sql);
-			if(mysqli_num_rows($result)) {
+			if (mysqli_num_rows($result)) {
 				while($row = mysqli_fetch_array($result)) {
 					$products[] = new Product(
 						$row['id'],
@@ -54,7 +54,7 @@
 						$row['brand'],
 						$row['description'],
 						$row['image'],
-						$row['price'],
+						$row['price']
 					);
 				}
 			}
@@ -73,7 +73,7 @@
 					$row['brand'],
 					$row['description'],
 					$row['image'],
-					$row['price'],
+					$row['price']
 				);
 			}
 			return null;
