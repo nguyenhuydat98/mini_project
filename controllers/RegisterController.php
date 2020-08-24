@@ -76,7 +76,9 @@
 					$user->username = $username;
 					$user->password = password_hash($password, PASSWORD_DEFAULT);
 					$user->save();
-					header('Location: '.BASE_URL);
+					echo "<script> alert('Account created. Please login.');
+						window.location.href ='". BASE_URL."';
+					</script>";
 				}
 			}
 		}
