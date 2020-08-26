@@ -1,5 +1,5 @@
 <div class="wrap-list-product-page">
-	<h2 class="title">Danh Sách Sản Phẩm</h2>
+	<h2 class="text-center">Danh Sách Sản Phẩm</h2>
 	<a href="index.php?controller=product&action=addNew" class="btn btn-primary" id="btn-create">Thêm sản phẩm mới</a>
 	<table class="table table-bordered table-striped">
 		<thead>
@@ -25,8 +25,32 @@
 				</td>
 				<td><?php echo $product->getPrice(); ?></td>
 				<td class="custom">
+					<?php if($product->getUserId() == User::findByName($_SESSION['username'])->id){ ?>
 					<a href="index.php?controller=product&action=find&id=<?php echo $product->getId();?>" class="btn btn-primary">Sửa</a>
-					<a href="index.php?controller=product&action=delete&id=<?php echo $product->getId();?>" class="btn btn-danger">Xóa</a>
+
+					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<?php echo $product->getId();?>">Xoá</button>
+					<div class="modal fade" id="delete-<?php echo $product->getId();?>" tabindex="-1" aria-labelledby="deleteModal" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title">Xóa sản phẩm?</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									Bạn chắc chắn muốn xóa sản phẩm có id = <?php echo $product->getId();?> không?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary" data-dismiss="modal">Trở lại</button>
+									<form method="POST" action="index.php?controller=product&action=delete&id=<?php echo $product->getId();?>">
+										<button type="submit" class="btn btn-danger">Xóa sản phẩm</button>
+									</form>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php } ?>
 				</td>
 			</tr>
 			<?php } ?>
@@ -34,10 +58,6 @@
 	</table>
 </div>
 <style type="">
-	.wrap-list-product-page .title {
-		margin: 20px auto;
-		text-align: center;
-	}
 	.wrap-list-product-page #btn-create {
 		margin-bottom: 20px;
 		text-align: right;
