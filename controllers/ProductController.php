@@ -139,6 +139,9 @@
 		public function checkValidateInput() {
 			$errors = [];
 			$pattern = "/^[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ0-9 .]+$/";
+			if (!isset($_POST['name']) || !isset($_POST['brand']) || !isset($_POST['description']) || !isset($_POST['price'])) {
+				die('Khong du du lieu');
+			}
 			foreach ($_POST as $key => $value) {
 				if($value == null) {
 					$errors[$key] = "Không được bỏ trống.";
@@ -153,7 +156,6 @@
 						$errors[$key] = "Không hợp lệ.";
 					}
 				}
-				
 			}
 			return $errors;
 		}
