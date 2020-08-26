@@ -3,6 +3,7 @@
 		<label class="font-weight-bold"> SIGN UP </label>
         <hr>
 		<form method="POST" action="?controller=register&action=store">
+            <input type="hidden" name="csrf" value="<?php echo $_SESSION['csrf_token'] ?>">
             <div class="form-group row">
                 <label for="username" class="col-md-4 col-form-label text-md-right">Username</label>
                 <div class="col-md-6">
