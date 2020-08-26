@@ -138,15 +138,16 @@
 
 		public function checkValidateInput() {
 			$errors = [];
-			// $pattern = "/^[a-zA-Z0-9 .]$/";
 			$pattern = "/^[aAàÀảẢãÃáÁạẠăĂằẰẳẲẵẴắẮặẶâÂầẦẩẨẫẪấẤậẬbBcCdDđĐeEèÈẻẺẽẼéÉẹẸêÊềỀểỂễỄếẾệỆfFgGhHiIìÌỉỈĩĨíÍịỊjJkKlLmMnNoOòÒỏỎõÕóÓọỌôÔồỒổỔỗỖốỐộỘơƠờỜởỞỡỠớỚợỢpPqQrRsStTuUùÙủỦũŨúÚụỤưƯừỪửỬữỮứỨựỰvVwWxXyYỳỲỷỶỹỸýÝỵỴzZ0-9 .]+$/";
 			foreach ($_POST as $key => $value) {
 				if($value == null) {
 					$errors[$key] = "Không được bỏ trống.";
 				}
 				else {
-					if($key == 'price' && !filter_var($value, FILTER_VALIDATE_INT)) {
-						$errors[$key] = "Giá bán phải là số nguyên.";
+					if($key == 'price') {
+						if(!is_numeric($value) || (int)$value < 0) {
+							$errors[$key] = "Giá bán phải là số nguyên dương.";
+						}
 					}
 					if($key != 'price' && $key != 'image' && !preg_match($pattern, $value)) {
 						$errors[$key] = "Không hợp lệ.";
