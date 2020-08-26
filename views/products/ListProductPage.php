@@ -25,6 +25,7 @@
 				</td>
 				<td><?php echo $product->getPrice(); ?></td>
 				<td class="custom">
+					<?php if($product->getUserId() == User::findByName($_SESSION['username'])->id){ ?>
 					<a href="index.php?controller=product&action=find&id=<?php echo $product->getId();?>" class="btn btn-primary">Sửa</a>
 
 					<button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-<?php echo $product->getId();?>">Xoá</button>
@@ -49,6 +50,7 @@
 							</div>
 						</div>
 					</div>
+					<?php } ?>
 				</td>
 			</tr>
 			<?php } ?>

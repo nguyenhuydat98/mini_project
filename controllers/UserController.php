@@ -57,8 +57,8 @@
 				$errors[] = "Cant find user";
 			}
 			$newUser = User::findByName($username,true);
-			if ($user->id != NULL && $_SESSION['username'] != $username) {
-				$errors[] = "Username already taken";
+			if ($newUser != NULL) {
+				$errors[] = "Username already taken.";
 			}
 			if (!empty($errors)) {
 				$this->edit($errors);

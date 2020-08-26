@@ -9,8 +9,9 @@
 		private $image;
 		private $price;
 
-		public function __construct($id, $name, $brand, $description, $image, $price) {
+		public function __construct($id, $user_id, $name, $brand, $description, $image, $price) {
 			$this->id = $id;
+			$this->user_id = $user_id;
 			$this->name = $name;
 			$this->brand = $brand;
 			$this->description = $description;
@@ -51,10 +52,11 @@
 			$conn  = DB::getConnection();
 			$sql   = "SELECT * FROM products";
 			$result = mysqli_query($conn, $sql);
-			if(mysqli_num_rows($result)) {
+			if (mysqli_num_rows($result)) {
 				while($row = mysqli_fetch_array($result)) {
 					$products[] = new Product(
 						$row['id'],
+						$row['user_id'],
 						$row['name'],
 						$row['brand'],
 						$row['description'],
@@ -63,6 +65,7 @@
 					);
 				}
 			}
+			DB::closeConnection();
 			return $products;
 		}
 
@@ -74,6 +77,7 @@
 				$row = mysqli_fetch_array($result);
 				return new Product(
 					$row['id'],
+					$row['user_id'],
 					$row['name'],
 					$row['brand'],
 					$row['description'],
@@ -81,6 +85,7 @@
 					$row['price']
 				);
 			}
+			DB::closeConnection();
 			return null;
 		}
 
@@ -94,6 +99,7 @@
 				price = '$price' WHERE id = '$id'
 			";
 			$result = mysqli_query($conn, $sql);
+			DB::closeConnection();
 		}
 
 		public function create($user_id, $name, $brand, $description, $image, $price) {
@@ -107,12 +113,14 @@
 				'$price'
 			)";
 			$result = mysqli_query($conn, $sql);
+			DB::closeConnection();
 		}
 
 		public function delete($id) {
 			$conn = DB::getConnection();
 			$sql  = "DELETE FROM products WHERE id = '$id'";
 			$result = mysqli_query($conn, $sql);
+			DB::closeConnection();
 		}
 	}
 ?>
