@@ -152,7 +152,6 @@
 						$errors[$key] = "Không hợp lệ.";
 					}
 				}
-				
 			}
 			return $errors;
 		}
