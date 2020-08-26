@@ -7,21 +7,21 @@
 		</div>
 		<div class="form-group">
 			<label>Tên sản phẩm</label>
-			<input type="text" name="name" class="form-control" value="<?php echo $product->getName(); ?>">
+			<input type="text" name="name" class="form-control" value="<?php echo $product->getName(); ?>" required>
 			<div class="text-danger">
 				<?php if(isset($errors['name'])) echo $errors['name']; ?>
 			</div>
 		</div>
 		<div class="form-group">
 			<label>Nhãn hiệu</label>
-			<input type="text" name="brand" class="form-control" value="<?php echo $product->getBrand();?>">
+			<input type="text" name="brand" class="form-control" value="<?php echo $product->getBrand();?>" required>
 			<div class="text-danger">
 				<?php if(isset($errors['brand'])) echo $errors['brand']; ?>
 			</div>
 		</div>
 		<div class="form-group">
 			<label>Mô tả</label>
-			<input type="text" name="description" class="form-control" value="<?php echo $product->getDescription(); ?>" >
+			<input type="text" name="description" class="form-control" value="<?php echo $product->getDescription(); ?>" required>
 			<div class="text-danger">
 				<?php if(isset($errors['description'])) echo $errors['description']; ?>
 			</div>
@@ -37,7 +37,7 @@
 		</div>
 		<div class="form-group">
 			<label>Giá bán</label>
-			<input type="text" name="price" class="form-control" value="<?php echo $product->getPrice();?>">
+			<input type="number" name="price" class="form-control" value="<?php echo $product->getPrice();?>" min=0 required>
 			<div class="text-danger">
 				<?php if(isset($errors['price'])) echo $errors['price']; ?>
 			</div>

@@ -84,6 +84,8 @@
 					$row['image'],
 					$row['price']
 				);
+			} else {
+				die("Sản phẩm không tồn tại.");
 			}
 			DB::closeConnection();
 			return null;

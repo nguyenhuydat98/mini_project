@@ -3,35 +3,35 @@
 	<form action="index.php?controller=product&action=create" method="POST" enctype="multipart/form-data">
 		<div class="form-group">
 			<label>Tên sản phẩm</label>
-			<input type="text" name="name" class="form-control">
+			<input type="text" name="name" class="form-control" required>
 			<div class="text-danger">
-				<?php if(isset($errors['name'])) echo $errors['name']; ?>
+				<?php if(isset($errors['name'])) echo $errors['name'];?>
 			</div>
 		</div>
 		<div class="form-group">
 			<label>Nhãn hiệu</label>
-			<input type="text" name="brand" class="form-control">
+			<input type="text" name="brand" class="form-control" required>
 			<div class="text-danger">
 				<?php if(isset($errors['brand'])) echo $errors['brand']; ?>
 			</div>
 		</div>
 		<div class="form-group">
 			<label>Mô tả</label>
-			<input type="text" name="description" class="form-control">
+			<input type="text" name="description" class="form-control" required>
 			<div class="text-danger">
 				<?php if(isset($errors['description'])) echo $errors['description']; ?>
 			</div>
 		</div>
 		<div class="form-group">
 			<label>Hình ảnh</label>
-			<input type="file" name="new-image" class="form-control" value="" >
+			<input type="file" name="new-image" class="form-control" value="" required>
 			<div class="text-danger">
 				<?php if(isset($errors['image'])) echo $errors['image']; ?>
 			</div>
 		</div>
 		<div class="form-group">
 			<label>Giá bán</label>
-			<input type="text" name="price" class="form-control">
+			<input type="number" name="price" class="form-control" min=0>
 			<div class="text-danger">
 				<?php if(isset($errors['price'])) echo $errors['price']; ?>
 			</div>
